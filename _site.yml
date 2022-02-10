@@ -1,0 +1,13 @@
+name: "penguin-website"
+navbar:
+  title: "Penguins Lab 3"
+  left:
+    - text: "Data"
+      href: data.html
+    - text: "Single Trait"
+      href: single_trait.html
+    - text: "Multiple Traits"
+      href: multiple_trait.html
+    - text: "Sexual Dimorphism"
+      href: sexual_dimorphism.html
+output_dir: "."

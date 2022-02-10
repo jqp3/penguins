@@ -1,0 +1,22 @@
+---
+title: "Multiple Traits"
+author: "Jaleigh Pier"
+date: "2/10/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Relationship between multiple traits
+
+Explore the relationship between different morphological traits in the `penguins` dataset.
+
+For example, what is the relationship between body mass and flipper length in penguins in this dataset? Does this relationship differ between species? Given the same body mass, which species of penguins tend to have the longest flippers?
+
+```{r}
+penguins %>%
+  ggplot() + geom_point(aes(x=flipper_length_mm, y=body_mass_g, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + geom_smooth(aes(x=flipper_length_mm, y=body_mass_g, color=species), method = "lm")
+```

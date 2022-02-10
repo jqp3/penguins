@@ -1,0 +1,34 @@
+---
+title: "Single Trait"
+author: "Jaleigh Pier"
+date: "2/10/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Single trait 
+
+Explore the distribution in any one of the morphological traits in the `penguin` dataset.
+
+For example, what is the lowest and highest bill lengths do penguins in this dataset have? Do different species have different bill lengths? How much do they overlap?
+
+Flipper length
+```{r}
+penguins %>%
+  ggplot() + geom_density(aes(x=flipper_length_mm, fill=species), alpha = 0.5) +
+  xlab("Flipper Length (mm)") + ylab("Density")
+
+```
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=species), alpha = 0.5) + facet_wrap(~ species, ncol = 3) + xlab("Flipper Length (mm)") + ylab("Frequency")
+```
+
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=island), alpha = 0.5) + facet_wrap(~ island, ncol = 3) + xlab("Flipper Length (mm)") + ylab("Frequency")
+```

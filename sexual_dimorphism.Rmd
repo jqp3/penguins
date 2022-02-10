@@ -1,0 +1,42 @@
+---
+title: "Sexual Dimorphism"
+author: "Jaleigh Pier"
+date: "2/10/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
+## Sexual dimorphism
+
+Explore the level of sexual dimorphism in different morphological traits in the `penguins` dataset.
+
+For example, what traits are sexually dimorphic in the penguins dataset? Is the level of sexual dimorphism the same in all three penguin species?
+
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~sex, ncol=3)
+```
+
+```{r}
+penguins %>%
+  ggplot() + geom_density(aes(x=bill_depth_mm, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~sex, ncol=3)
+```
+```{r}
+penguins %>%
+  ggplot(aes(x=flipper_length_mm, y=bill_length_mm, color=sex)) + geom_point() + xlab("Flipper Length (mm)") + ylab("Bill Length (mm)") + facet_wrap(~ species, ncol=3)
+```
+```{r}
+penguins %>%
+  ggplot(aes(x=flipper_length_mm, y=sex, color=sex)) + geom_boxplot(outlier.alpha = 0, alpha=0) + geom_jitter(width = 0, size=1) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~species) + coord_flip()
+```
+```{r}
+penguins %>%
+  ggplot() +
+  geom_bar(mapping = aes(x=year, fill=species)) +
+  facet_wrap(~island)
+```
