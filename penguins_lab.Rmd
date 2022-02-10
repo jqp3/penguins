@@ -5,9 +5,9 @@ date: "2/10/2022"
 output: html_document
 ---
 
-##Data
+## Data
 
-'penguins' and 'penguins_raw' datasets contain data for 344 penguins. There are 3 different species of penguins in this dataset, collected from 3 islands in the Palmer Archipelago, Antarctica.
+`penguins` and `penguins_raw` datasets contain data for 344 penguins. There are 3 different species of penguins in this dataset, collected from 3 islands in the Palmer Archipelago, Antarctica.
 
 ![Penguins in this dataset.](https://www.gabemednick.com/post/penguin/featured.png)
 
@@ -17,21 +17,95 @@ library(palmerpenguins)
 library(tidyverse)
 ```
 
+```{r}
+dim(penguins)
+```
+```{r}
+#View(penguins)
+```
+
+```{r}
+colnames(penguins)
+```
+```{r}
+head(penguins)
+str(penguins)
+```
+
+
+## Single trait 
+
+Explore the distribution in any one of the morphological traits in the `penguin` dataset.
+
+For example, what is the lowest and highest bill lengths do penguins in this dataset have? Do different species have different bill lengths? How much do they overlap?
+
+Flipper length
+```{r}
+penguins %>%
+  ggplot() + geom_density(aes(x=flipper_length_mm, fill=species), alpha = 0.5) +
+  xlab("Flipper Length (mm)") + ylab("Density")
+
+```
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=species), alpha = 0.5) + facet_wrap(~ species, ncol = 3) + xlab("Flipper Length (mm)") + ylab("Frequency")
+```
+
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=island), alpha = 0.5) + facet_wrap(~ island, ncol = 3) + xlab("Flipper Length (mm)") + ylab("Frequency")
+```
 
 
 
-##Single trait 
+
+
+## Relationship between multiple traits
+
+Explore the relationship between different morphological traits in the `penguins` dataset.
+
+For example, what is the relationship between body mass and flipper length in penguins in this dataset? Does this relationship differ between species? Given the same body mass, which species of penguins tend to have the longest flippers?
+
+```{r}
+penguins %>%
+  ggplot() + geom_point(aes(x=flipper_length_mm, y=body_mass_g, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + geom_smooth(aes(x=flipper_length_mm, y=body_mass_g, color=species), method = "lm")
+```
+
+
+## Sexual dimorphism
+
+Explore the level of sexual dimorphism in different morphological traits in the `penguins` dataset.
+
+For example, what traits are sexually dimorphic in the penguins dataset? Is the level of sexual dimorphism the same in all three penguin species?
+
+```{r}
+penguins %>%
+  ggplot() + geom_histogram(aes(x=flipper_length_mm, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~sex, ncol=3)
+```
+
+```{r}
+penguins %>%
+  ggplot() + geom_density(aes(x=bill_depth_mm, color=species), alpha = 0.5) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~sex, ncol=3)
+```
+```{r}
+penguins %>%
+  ggplot(aes(x=flipper_length_mm, y=bill_length_mm, color=sex)) + geom_point() + xlab("Flipper Length (mm)") + ylab("Bill Length (mm)") + facet_wrap(~ species, ncol=3)
+```
+```{r}
+penguins %>%
+  ggplot(aes(x=flipper_length_mm, y=sex, color=sex)) + geom_boxplot(outlier.alpha = 0, alpha=0) + geom_jitter(width = 0, size=1) + xlab("Flipper Length (mm)") + ylab("Body Mass (g)") + facet_wrap(~species) + coord_flip()
+```
+```{r}
+penguins %>%
+  ggplot() +
+  geom_bar(mapping = aes(x=year, fill=species)) +
+  facet_wrap(~island)
+```
 
 
 
 
-##Relationship between multiple traits
 
-
-
-
-
-##Sexual dimorphism
 
 
 
