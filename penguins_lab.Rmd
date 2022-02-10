@@ -102,8 +102,8 @@ penguins %>%
   facet_wrap(~island)
 ```
 ```{r}
-library(cowplot)
-cowplot::plot_grid(plot_a, plot_b, ncol=1) #combine several plots together
+#library(cowplot)
+#cowplot::plot_grid(plot_a, plot_b, ncol=1) #combine several plots together
 ```
 
 

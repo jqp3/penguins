@@ -12,7 +12,7 @@
 <meta name="author" content="Jaleigh Pier" />
 
 
-<title>Penguins Lab</title>
+<title>Multiple Traits</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -266,71 +266,15 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Penguins Lab</h1>
+<h1 class="title toc-ignore">Multiple Traits</h1>
 <h4 class="author">Jaleigh Pier</h4>
 <h4 class="date">2/10/2022</h4>
 
 </div>
 
 
-<div id="data" class="section level2">
-<h2>Data</h2>
-<p><code>penguins</code> and <code>penguins_raw</code> datasets contain data for 344 penguins. There are 3 different species of penguins in this dataset, collected from 3 islands in the Palmer Archipelago, Antarctica.</p>
-<div class="figure">
-<img src="https://www.gabemednick.com/post/penguin/featured.png" alt="" />
-<p class="caption">Penguins in this dataset.</p>
-</div>
-<pre class="r"><code>#install.packages(&quot;palmerpenguins&quot;)
-library(palmerpenguins)
-library(tidyverse)</code></pre>
-<pre class="r"><code>dim(penguins)</code></pre>
-<pre><code>## [1] 344   8</code></pre>
-<pre class="r"><code>#View(penguins)</code></pre>
-<pre class="r"><code>colnames(penguins)</code></pre>
-<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;    
-## [5] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;       &quot;sex&quot;               &quot;year&quot;</code></pre>
-<pre class="r"><code>head(penguins)</code></pre>
-<pre><code>## # A tibble: 6 x 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
-##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
-## 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
-## 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
-## 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
-## 4 Adelie  Torgersen           NA            NA                  NA          NA &lt;NA&gt;    2007
-## 5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
-## 6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007</code></pre>
-<pre class="r"><code>str(penguins)</code></pre>
-<pre><code>## tibble [344 x 8] (S3: tbl_df/tbl/data.frame)
-##  $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
-##  $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
-##  $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
-##  $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
-##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
-##  $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
-##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
-</div>
-<div id="single-trait" class="section level2">
-<h2>Single trait</h2>
-<p>Explore the distribution in any one of the morphological traits in the <code>penguin</code> dataset.</p>
-<p>For example, what is the lowest and highest bill lengths do penguins in this dataset have? Do different species have different bill lengths? How much do they overlap?</p>
-<p>Flipper length</p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() + geom_density(aes(x=flipper_length_mm, fill=species), alpha = 0.5) +
-  xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Density&quot;)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=species), alpha = 0.5) + facet_wrap(~ species, ncol = 3) + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Frequency&quot;)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() + geom_histogram(aes(x=flipper_length_mm, fill=island), alpha = 0.5) + facet_wrap(~ island, ncol = 3) + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Frequency&quot;)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-</div>
+<pre class="r"><code>library(tidyverse)
+library(palmerpenguins)</code></pre>
 <div id="relationship-between-multiple-traits" class="section level2">
 <h2>Relationship between multiple traits</h2>
 <p>Explore the relationship between different morphological traits in the <code>penguins</code> dataset.</p>
@@ -340,37 +284,7 @@ library(tidyverse)</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
-<div id="sexual-dimorphism" class="section level2">
-<h2>Sexual dimorphism</h2>
-<p>Explore the level of sexual dimorphism in different morphological traits in the <code>penguins</code> dataset.</p>
-<p>For example, what traits are sexually dimorphic in the penguins dataset? Is the level of sexual dimorphism the same in all three penguin species?</p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() + geom_histogram(aes(x=flipper_length_mm, color=species), alpha = 0.5) + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Body Mass (g)&quot;) + facet_wrap(~sex, ncol=3)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() + geom_density(aes(x=bill_depth_mm, color=species), alpha = 0.5) + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Body Mass (g)&quot;) + facet_wrap(~sex, ncol=3)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot(aes(x=flipper_length_mm, y=bill_length_mm, color=sex)) + geom_point() + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Bill Length (mm)&quot;) + facet_wrap(~ species, ncol=3)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot(aes(x=flipper_length_mm, y=sex, color=sex)) + geom_boxplot(outlier.alpha = 0, alpha=0) + geom_jitter(width = 0, size=1) + xlab(&quot;Flipper Length (mm)&quot;) + ylab(&quot;Body Mass (g)&quot;) + facet_wrap(~species) + coord_flip()</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_boxplot).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<pre class="r"><code>penguins %&gt;%
-  ggplot() +
-  geom_bar(mapping = aes(x=year, fill=species)) +
-  facet_wrap(~island)</code></pre>
-<p><img src="penguins_lab_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<pre class="r"><code>#library(cowplot)
-#cowplot::plot_grid(plot_a, plot_b, ncol=1) #combine several plots together</code></pre>
+<p><img src="multiple_traits_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 
 
