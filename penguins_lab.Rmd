@@ -1,0 +1,38 @@
+---
+title: "Penguins Lab"
+author: "Jaleigh Pier"
+date: "2/10/2022"
+output: html_document
+---
+
+##Data
+
+'penguins' and 'penguins_raw' datasets contain data for 344 penguins. There are 3 different species of penguins in this dataset, collected from 3 islands in the Palmer Archipelago, Antarctica.
+
+![Penguins in this dataset.](https://www.gabemednick.com/post/penguin/featured.png)
+
+```{r}
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+library(tidyverse)
+```
+
+
+
+
+##Single trait 
+
+
+
+
+##Relationship between multiple traits
+
+
+
+
+
+##Sexual dimorphism
+
+
+
+
